@@ -1,0 +1,6 @@
+framework module Pods_WalletLibBitcoin_WalletLibBitcoinTests {
+  umbrella header "Pods-WalletLibBitcoin-WalletLibBitcoinTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

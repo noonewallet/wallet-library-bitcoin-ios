@@ -1,0 +1,37 @@
+{
+  "name": "WalletLibBitcoinScript",
+  "version": "1.0",
+  "summary": "WalletLibBitcoinScript",
+  "homepage": "https://github.com/noonewallet/wallet-library-bitcoin-script-ios",
+  "license": "MIT",
+  "authors": "WalletLibBitcoinScript",
+  "source": {
+    "git": "https://github.com/noonewallet/wallet-library-bitcoin-script-ios.git",
+    "tag": "v1.0",
+    "submodules": true
+  },
+  "swift_versions": "5.0",
+  "source_files": [
+    "WalletLibBitcoinScript/*{swift}",
+    "WalletLibBitcoinScript/**/*{swift}"
+  ],
+  "ios": {
+    "dependencies": {
+      "WalletLibCrypto": [
+
+      ]
+    }
+  },
+  "osx": {
+    "dependencies": {
+      "WalletLibCrypto": [
+
+      ]
+    }
+  },
+  "platforms": {
+    "ios": "11.0",
+    "osx": "11.0"
+  },
+  "swift_version": "5.0"
+}

@@ -1,0 +1,6 @@
+framework module WalletLibAddressBech32 {
+  umbrella header "WalletLibAddressBech32-umbrella.h"
+
+  export *
+  module * { export * }
+}

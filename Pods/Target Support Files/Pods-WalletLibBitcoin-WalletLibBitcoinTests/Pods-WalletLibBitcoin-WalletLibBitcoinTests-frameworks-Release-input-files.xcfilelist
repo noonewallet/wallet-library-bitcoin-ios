@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-WalletLibBitcoin-WalletLibBitcoinTests/Pods-WalletLibBitcoin-WalletLibBitcoinTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/WalletLibAddressBech32/WalletLibAddressBech32.framework
+${BUILT_PRODUCTS_DIR}/WalletLibBitcoinScript/WalletLibBitcoinScript.framework
+${BUILT_PRODUCTS_DIR}/WalletLibCrypto/WalletLibCrypto.framework

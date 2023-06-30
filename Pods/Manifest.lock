@@ -1,0 +1,28 @@
+PODS:
+  - WalletLibAddressBech32 (1.0):
+    - WalletLibCrypto
+  - WalletLibBitcoinScript (1.0):
+    - WalletLibCrypto
+  - WalletLibCrypto (1.0)
+
+DEPENDENCIES:
+  - WalletLibAddressBech32 (from `Submodule/WalletLibAddressBech32`)
+  - WalletLibBitcoinScript (from `Submodule/WalletLibBitcoinScript`)
+  - WalletLibCrypto (from `Submodule/WalletLibCrypto`)
+
+EXTERNAL SOURCES:
+  WalletLibAddressBech32:
+    :path: Submodule/WalletLibAddressBech32
+  WalletLibBitcoinScript:
+    :path: Submodule/WalletLibBitcoinScript
+  WalletLibCrypto:
+    :path: Submodule/WalletLibCrypto
+
+SPEC CHECKSUMS:
+  WalletLibAddressBech32: ab0607e117a3fc9973dc0bd76bf927c642bb2d3d
+  WalletLibBitcoinScript: 66f9e1e209f332a4db997dabe05df3bf1b04f922
+  WalletLibCrypto: 6f0974df6e95bb18ecde0a6cd321a697f2b4e75b
+
+PODFILE CHECKSUM: ffbeff28d33811db625225cf868e1fe4210676c2
+
+COCOAPODS: 1.11.2
