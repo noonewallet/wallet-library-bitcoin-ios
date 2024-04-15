@@ -12,19 +12,19 @@ import WalletLibBitcoinScript
 public class BitcoinTransactionSettings {
     
     
-    var version: UInt32 = 1
+    public var version: UInt32 = 1
     
     
-    var witness: (marker: UInt8, flag: UInt8)?
+    public var witness: (marker: UInt8, flag: UInt8)?
     
     
-    var allowedScriptTypes: [BitcoinScript.ScriptType] = [.P2PKH]
+    public var allowedScriptTypes: [BitcoinScript.ScriptType] = [.P2PKH]
     
     
-    var signatureHashType: SignatureHashType = SignatureHashType(btc: .sighashAll)
+    public var signatureHashType: SignatureHashType = SignatureHashType(btc: .sighashAll)
     
     
-    var lockTime: UInt32 = 0
+    public var lockTime: UInt32 = 0
     
     
     public init() {}
