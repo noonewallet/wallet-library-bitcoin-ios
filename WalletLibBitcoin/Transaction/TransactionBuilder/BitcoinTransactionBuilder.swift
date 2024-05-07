@@ -43,7 +43,7 @@ public class BitcoinTransactionBuilder<T: BitcoinTemplateTransaction> {
     
     /// Transaction creation
     /// - Parameter feePerByte: Transaction fee value per byte in Satoshis
-    public func buildTransaction(feePerByte: UInt64) throws -> T {
+    public func buildTransaction(feePerByte: UInt64, rbf: Bool = false) throws -> T {
         
         let expectedFeeValue = try calculator.calculate(with: feePerByte)
         
@@ -52,7 +52,8 @@ public class BitcoinTransactionBuilder<T: BitcoinTemplateTransaction> {
                                     id: Data($0.transactionHash.reversed()).hex,
                                     index: Int($0.outputN),
                                     value: UInt64($0.value),
-                                    script: $0.script)
+                                    script: $0.script,
+                                    sequence: rbf ? 0 : UInt32.max)
         })
         
         let inputsAmount = usedInputs.map({ $0.value }).reduce(0, +)
@@ -81,7 +82,7 @@ public class BitcoinTransactionBuilder<T: BitcoinTemplateTransaction> {
     
     /// Transaction creation
     /// - Parameter feeAmount: The commission value for the transaction which will be set without calculation in accordance with its size
-    public func buildTransaction(feeAmount: UInt64) throws -> T {
+    public func buildTransaction(feeAmount: UInt64, rbf: Bool = false) throws -> T {
         
         let dust: UInt64 = params.isSendAll ? 0 : params.dust
          
@@ -98,7 +99,8 @@ public class BitcoinTransactionBuilder<T: BitcoinTemplateTransaction> {
                                                     id: Data(txinput.transactionHash.reversed()).hex,
                                                     index: Int(txinput.outputN),
                                                     value: UInt64(txinput.value),
-                                                    script: txinput.script)
+                                                    script: txinput.script,
+                                                    sequence: rbf ? 0 : UInt32.max)
                 
                 usedInputs.append(input)
                 total += txinput.value
