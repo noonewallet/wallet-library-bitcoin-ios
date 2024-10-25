@@ -69,7 +69,16 @@ public class BitcoinPrivateKeyAddress {
             
         }
         
-        let privateKeyData = wifDecoded.subdata(in: 1..<(wifDecoded.count - 1))
+        var privateKeyData = wifDecoded.subdata(in: 1..<(wifDecoded.count - 1))
+        
+        var wif = wif
+        if wifDecoded.count == 33 {
+            privateKeyData.append(0x01)
+            var compressedPrivateKey = Data([0x80]) + privateKeyData
+            let checksum = compressedPrivateKey.sha256sha256().prefix(4)
+            compressedPrivateKey.append(contentsOf: checksum)
+            wif = compressedPrivateKey.base58(usingChecksum: true)
+        }
         
         let privateKeyDataLength = privateKeyData.count
         
