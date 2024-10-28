@@ -32,7 +32,7 @@ public class BitcoinPrivateKeyAddress {
         
         data = privateKeyData
         
-        let s3 = Data([version] + [UInt8](privateKeyData) + [0x01])
+        let s3 = Data([version] + [UInt8](privateKeyData) + [BitcoinAddressConstants.compressionFlag])
         wif = s3.base58(usingChecksum: true)
     }
     
@@ -51,7 +51,7 @@ public class BitcoinPrivateKeyAddress {
 
         data = key.data
         
-        let s3 = Data([version] + [UInt8](key.data) + [0x01])
+        let s3 = Data([version] + [UInt8](key.data) + [BitcoinAddressConstants.compressionFlag])
         wif = s3.base58(usingChecksum: true)
     }
     
@@ -60,35 +60,40 @@ public class BitcoinPrivateKeyAddress {
     /// - Parameter wif: WIF string
     /// - Throws: BitcoinCreateAddressError.invalidWIFAddressLength, BitcoinCreateAddressError.invalidDataLength, BitcoinCreateAddressError.invalidWIFAddressVersion
     public init(wif: String) throws {
-        
         let wifDecoded = wif.base58decode(usingChecksum: true)
-        
         guard wifDecoded.count > 3 else {
-            
             throw BitcoinCreateAddressError.invalidWIFAddressLength
-            
         }
         
-        let privateKeyData = wifDecoded.subdata(in: 1..<(wifDecoded.count - 1))
+        guard let versionByte = wifDecoded.first,
+              versionByte == BitcoinVersionByteConstant.private_key
+        else {
+            throw BitcoinCreateAddressError.invalidWIFAddressVersion
+        }
+        
+        var privateKeyData = wifDecoded.dropFirst()
+        let isCompressed = privateKeyData.count == BitcoinAddressConstants.privateKeyDataLength + 1
+            && wifDecoded.last == BitcoinAddressConstants.compressionFlag
+        
+        if isCompressed {
+            privateKeyData.removeLast()
+        }
         
         let privateKeyDataLength = privateKeyData.count
-        
         guard privateKeyDataLength == BitcoinAddressConstants.privateKeyDataLength else {
-            
             throw BitcoinCreateAddressError.invalidDataLength
-            
         }
         
-        let versionByte = wifDecoded[0]
-        
-        guard versionByte == BitcoinVersionByteConstant.private_key else {
-            
-            throw BitcoinCreateAddressError.invalidWIFAddressVersion
-            
+        var wif = wif
+        if !isCompressed {
+            var compressedPrivateKey = Data([versionByte]) + privateKeyData + Data([BitcoinAddressConstants.compressionFlag])
+            let checksum = compressedPrivateKey.sha256sha256().prefix(4)
+            compressedPrivateKey.append(contentsOf: checksum)
+            wif = compressedPrivateKey.base58(usingChecksum: true)
         }
         
         self.wif = wif
-        data = privateKeyData
+        self.data = privateKeyData
     }
     
 }

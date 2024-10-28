@@ -1,3 +1,0 @@
-${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletLibAddressBech32.framework
-${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletLibBitcoinScript.framework
-${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalletLibCrypto.framework
