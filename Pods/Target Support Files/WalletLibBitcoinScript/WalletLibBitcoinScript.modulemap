@@ -1,6 +1,0 @@
-framework module WalletLibBitcoinScript {
-  umbrella header "WalletLibBitcoinScript-umbrella.h"
-
-  export *
-  module * { export * }
-}
