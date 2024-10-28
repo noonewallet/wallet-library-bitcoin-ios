@@ -20,6 +20,7 @@ public struct BitcoinAddressConstants {
     //BIP-141 Defined witness program version
     public static let witnessProgramVersionByte: UInt8 = 0x00
     
+    public static let compressionFlag: UInt8 = 0x01
     
     public static let witnessProgramWPKHLength = 20
     
