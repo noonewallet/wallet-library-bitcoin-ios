@@ -31,7 +31,10 @@ public struct BitcoinAddressConstants {
     public static let privateKeyDataLength = 32
     
     
-    public static let publicKeyDataLength = 33
+    public static let compressedPublicKeyDataLength = 33
+    
+    
+    public static let uncompressedPublicKeyDataLength = 65
     
     
     public static let publicKeyHashDataLength = 21

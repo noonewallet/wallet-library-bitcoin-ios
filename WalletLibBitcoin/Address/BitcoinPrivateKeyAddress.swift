@@ -18,6 +18,9 @@ public class BitcoinPrivateKeyAddress {
     public let data: Data
     
     
+    public let keyCompression: KeyCompression
+    
+    
     /// Initialize with a private key data
     /// - Parameter privateKeyData: Private key data (should be 32 bytes long)
     /// - Parameter version: Version byte
@@ -34,6 +37,7 @@ public class BitcoinPrivateKeyAddress {
         
         let s3 = Data([version] + [UInt8](privateKeyData) + [BitcoinAddressConstants.compressionFlag])
         wif = s3.base58(usingChecksum: true)
+        self.keyCompression = .CompressedConversion
     }
     
     
@@ -53,6 +57,7 @@ public class BitcoinPrivateKeyAddress {
         
         let s3 = Data([version] + [UInt8](key.data) + [BitcoinAddressConstants.compressionFlag])
         wif = s3.base58(usingChecksum: true)
+        self.keyCompression = .CompressedConversion
     }
     
     
@@ -84,16 +89,9 @@ public class BitcoinPrivateKeyAddress {
             throw BitcoinCreateAddressError.invalidDataLength
         }
         
-        var wif = wif
-        if !isCompressed {
-            var compressedPrivateKey = Data([versionByte]) + privateKeyData + Data([BitcoinAddressConstants.compressionFlag])
-            let checksum = compressedPrivateKey.sha256sha256().prefix(4)
-            compressedPrivateKey.append(contentsOf: checksum)
-            wif = compressedPrivateKey.base58(usingChecksum: true)
-        }
-        
         self.wif = wif
         self.data = privateKeyData
+        self.keyCompression = isCompressed ? .CompressedConversion : .UncompressedConversion
     }
     
 }
