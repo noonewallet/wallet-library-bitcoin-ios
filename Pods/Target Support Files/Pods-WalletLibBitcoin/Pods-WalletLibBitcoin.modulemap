@@ -1,6 +1,0 @@
-framework module Pods_WalletLibBitcoin {
-  umbrella header "Pods-WalletLibBitcoin-umbrella.h"
-
-  export *
-  module * { export * }
-}

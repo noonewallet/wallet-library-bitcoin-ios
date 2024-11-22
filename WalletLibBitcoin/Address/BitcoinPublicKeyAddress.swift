@@ -30,7 +30,7 @@ public class BitcoinPublicKeyAddress {
     /// - Throws: BitcoinCreateAddressError.invalidDataLength
     public init(publicKey: Data, type: AddressScriptHashTypeProtocol) throws {
         
-        guard publicKey.count == BitcoinAddressConstants.publicKeyDataLength else {
+        guard publicKey.count == BitcoinAddressConstants.compressedPublicKeyDataLength else {
         
             throw BitcoinCreateAddressError.invalidDataLength
             
@@ -49,14 +49,14 @@ public class BitcoinPublicKeyAddress {
     /// Initialize with a Key object
     /// - Parameter key: Key of public or private type
     /// - Throws: BitcoinCreateAddressError.invalidKeyType, BitcoinCreateAddressError.invalidDataLength,
-    public init(key: KeySecp256k1, type: AddressScriptHashTypeProtocol) throws {
+    public init(key: KeySecp256k1, type: AddressScriptHashTypeProtocol, keyCompression: KeyCompression) throws {
         
         var publicKey: Data?
         
         switch key.type {
         case .Private:
             
-            publicKey = key.publicKeyCompressed(.CompressedConversion)
+            publicKey = key.publicKeyCompressed(keyCompression)
             
         case .Public:
             
@@ -74,10 +74,10 @@ public class BitcoinPublicKeyAddress {
             
         }
         
-        guard data.count == BitcoinAddressConstants.publicKeyDataLength else {
-            
+        guard data.count == BitcoinAddressConstants.compressedPublicKeyDataLength
+                || data.count == BitcoinAddressConstants.uncompressedPublicKeyDataLength
+        else {
             throw BitcoinCreateAddressError.invalidDataLength
-            
         }
         
         let payload = BitcoinPublicKeyAddress.payload(for: data, type: type)

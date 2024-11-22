@@ -6,23 +6,34 @@ PODS:
   - WalletLibCrypto (1.0)
 
 DEPENDENCIES:
-  - WalletLibAddressBech32 (from `Submodule/WalletLibAddressBech32`)
-  - WalletLibBitcoinScript (from `Submodule/WalletLibBitcoinScript`)
-  - WalletLibCrypto (from `Submodule/WalletLibCrypto`)
+  - WalletLibAddressBech32 (from `https://github.com/noonewallet/wallet-library-address-bech32-ios`)
+  - WalletLibBitcoinScript (from `https://github.com/noonewallet/wallet-library-bitcoin-script-ios`)
+  - WalletLibCrypto (from `https://github.com/noonewallet/wallet-library-crypto-ios`)
 
 EXTERNAL SOURCES:
   WalletLibAddressBech32:
-    :path: Submodule/WalletLibAddressBech32
+    :git: https://github.com/noonewallet/wallet-library-address-bech32-ios
   WalletLibBitcoinScript:
-    :path: Submodule/WalletLibBitcoinScript
+    :git: https://github.com/noonewallet/wallet-library-bitcoin-script-ios
   WalletLibCrypto:
-    :path: Submodule/WalletLibCrypto
+    :git: https://github.com/noonewallet/wallet-library-crypto-ios
+
+CHECKOUT OPTIONS:
+  WalletLibAddressBech32:
+    :commit: a4dea396e84e39adf9d367cc891fe61465681d9d
+    :git: https://github.com/noonewallet/wallet-library-address-bech32-ios
+  WalletLibBitcoinScript:
+    :commit: c33a1ae9607eb112606a49fb967c0454cd63ded8
+    :git: https://github.com/noonewallet/wallet-library-bitcoin-script-ios
+  WalletLibCrypto:
+    :commit: 3146f5949c708f088eb1b27067a41fae757e3c42
+    :git: https://github.com/noonewallet/wallet-library-crypto-ios
 
 SPEC CHECKSUMS:
   WalletLibAddressBech32: ab0607e117a3fc9973dc0bd76bf927c642bb2d3d
   WalletLibBitcoinScript: 66f9e1e209f332a4db997dabe05df3bf1b04f922
-  WalletLibCrypto: 6f0974df6e95bb18ecde0a6cd321a697f2b4e75b
+  WalletLibCrypto: 84423e8135d6d1a9fe8a96dcfdf2ef046e5919f4
 
-PODFILE CHECKSUM: ffbeff28d33811db625225cf868e1fe4210676c2
+PODFILE CHECKSUM: adf3e98e66ef156ce44d6a2680592cdadc251eee
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.16.1
